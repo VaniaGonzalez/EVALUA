@@ -339,6 +339,7 @@ namespace Evalua
         private void Condicion()
         {
             Expresion();
+            stack.Pop();
             match(Tipos.OperadorRelacional);
             Expresion();
         }
