@@ -1,0 +1,30 @@
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\bin\Debug\net6.0\Evalua.exe
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\bin\Debug\net6.0\Evalua.deps.json
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\bin\Debug\net6.0\Evalua.runtimeconfig.json
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\bin\Debug\net6.0\Evalua.dll
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\bin\Debug\net6.0\ref\Evalua.dll
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\bin\Debug\net6.0\Evalua.pdb
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\obj\Debug\net6.0\Evalua.csproj.AssemblyReference.cache
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\obj\Debug\net6.0\Evalua.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\obj\Debug\net6.0\Evalua.AssemblyInfoInputs.cache
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\obj\Debug\net6.0\Evalua.AssemblyInfo.cs
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\obj\Debug\net6.0\Evalua.csproj.CoreCompileInputs.cache
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\obj\Debug\net6.0\Evalua.dll
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\obj\Debug\net6.0\ref\Evalua.dll
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\obj\Debug\net6.0\Evalua.pdb
+C:\Users\HOME\Documents\PAOLA TAREAS\5TO SEMESTRE\AUTOMATAS II\UNIDAD 1\Evalua\obj\Debug\net6.0\Evalua.genruntimeconfig.cache
+D:\Semestre 5\Evalua\bin\Debug\net6.0\Evalua.exe
+D:\Semestre 5\Evalua\bin\Debug\net6.0\Evalua.deps.json
+D:\Semestre 5\Evalua\bin\Debug\net6.0\Evalua.runtimeconfig.json
+D:\Semestre 5\Evalua\bin\Debug\net6.0\Evalua.dll
+D:\Semestre 5\Evalua\bin\Debug\net6.0\Evalua.pdb
+D:\Semestre 5\Evalua\obj\Debug\net6.0\Evalua.csproj.AssemblyReference.cache
+D:\Semestre 5\Evalua\obj\Debug\net6.0\Evalua.GeneratedMSBuildEditorConfig.editorconfig
+D:\Semestre 5\Evalua\obj\Debug\net6.0\Evalua.AssemblyInfoInputs.cache
+D:\Semestre 5\Evalua\obj\Debug\net6.0\Evalua.AssemblyInfo.cs
+D:\Semestre 5\Evalua\obj\Debug\net6.0\Evalua.csproj.CoreCompileInputs.cache
+D:\Semestre 5\Evalua\obj\Debug\net6.0\Evalua.dll
+D:\Semestre 5\Evalua\obj\Debug\net6.0\refint\Evalua.dll
+D:\Semestre 5\Evalua\obj\Debug\net6.0\Evalua.pdb
+D:\Semestre 5\Evalua\obj\Debug\net6.0\Evalua.genruntimeconfig.cache
+D:\Semestre 5\Evalua\obj\Debug\net6.0\ref\Evalua.dll
