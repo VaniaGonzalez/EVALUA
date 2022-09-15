@@ -59,17 +59,17 @@ namespace Evalua
         public Lexico()
         {
             linea = 1;
-            string path = "C:\\Users\\Vani Vgas\\OneDrive\\Documents\\5to Semestre\\3. Lenguajes y Automatas II\\Unidad 1\\Evalua\\Prueba.cpp";
+            string path = "D:\\Semestre 5\\Evalua\\prueba.cpp";
             bool existencia = File.Exists(path);
-            log = new StreamWriter("C:\\Users\\Vani Vgas\\OneDrive\\Documents\\5to Semestre\\3. Lenguajes y Automatas II\\Unidad 1\\Evalua\\Prueba.Log"); 
+            log = new StreamWriter("D:\\Semestre 5\\Evalua\\prueba.Log"); 
             log.AutoFlush = true;
-            log.WriteLine("Primer constructor");
+            //log.WriteLine("Primer constructor");
             log.WriteLine("Archivo: prueba.cpp");
             log.WriteLine(DateTime.Now);//Requerimiento 1:
             //Investigar como checar si un archivo existe o no existe 
             if (existencia == true)
             {
-                archivo = new StreamReader(path);
+                archivo = new StreamReader("D:\\Semestre 5\\Evalua\\prueba.cpp");
             }
             else
             {
@@ -85,7 +85,7 @@ namespace Evalua
             string path2 = Path.ChangeExtension(nombre, ".log");
             log = new StreamWriter(path2); 
             log.AutoFlush = true;
-            log.WriteLine("Segundo constructor");
+            //log.WriteLine("Segundo constructor");
             log.WriteLine("Archivo: "+nombre);
             log.WriteLine(DateTime.Now);
             if (File.Exists(nombre))

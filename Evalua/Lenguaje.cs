@@ -1,20 +1,18 @@
 using System;
-using System.Collections.Generic;
 
-//Requerimiento 1.- Eliminar las dobles comillas del printf e interpretar las secuencias
-//                  dentro de la cadena
-//Requerimiento 2.- Marcar los errores sintacticos cuando la variable no exista 
-//Requerimiento 3.- Modificar el valor de la variable en la asignacion(metodo asignacion)
-//Requerimiento 4.- Obtener el valor de la varible cuando se requeire y programar el metodo getValor
-//Requerimiento 5.- Modificar el valor de la variable en el Scantf
+//*Requerimiento 1: Eliminar las doble comillas del printf e interpretar las secuencias de escape
+//                  dentro de la cadena. 
+//*Requerimiento 2: Marcar los errores sintacticos cuando la variable no exista. 
+//*Requerimiento 3: Modificar el valor de la variable en la asignacion
+//*Requerimiento 4: Obtener el valor de la variable cuando se requiera y programar el mètodo getValor
+//*Requerimiento 5: Modificar el valor de la variable en el scanf
 
 namespace Evalua
 {
-    
     public class Lenguaje : Sintaxis
     {
-        List < Variable > variables = new List< Variable > ();
-        Stack< float > stack = new Stack< float > ();
+        List<Variable> variables = new List<Variable>();
+        Stack<float> stack = new Stack<float>();
         public Lenguaje()
         {
 
@@ -23,22 +21,19 @@ namespace Evalua
         {
 
         }
-        //Programa  -> Librerias? Variables? Main
-        private void addVariable(String nombre, Variable.TipoDato tipo)
+        private void addVariable(string nombre, Variable.TipoDato tipo)
         {
             variables.Add(new Variable(nombre, tipo));
         }
-
         private void displayVariables()
         {
             log.WriteLine();
-            log.WriteLine("Variables:");
+            log.WriteLine("Variables: ");
             foreach (Variable v in variables)
-            {  
-                log.WriteLine(v.getNombre() + "  " + v.getTipo() + " " +v.getValor());
+            {
+                log.WriteLine(v.getNombre() + " " + v.getTipo() + " " + v.getValor());
             }
         }
-
         private bool existeVariable(string nombre)
         {
             foreach (Variable v in variables)
@@ -46,20 +41,35 @@ namespace Evalua
                 if (v.getNombre().Equals(nombre))
                 {
                     return true;
-                }    
+                }
             }
             return false;
         }
-
+        //Requerimiento 3, 5-----
         private void modVariable(string nombre, float nuevoValor)
         {
-            //Se Genera con un for
+            foreach (Variable v in variables)
+            {
+                if (v.getNombre().Equals(nombre))
+                {
+                    v.setValor(nuevoValor);
+                    return;
+                }
+            }
         }
-        private float getValor(string nombre)
+        //Requerimiento 4---
+        private float getValor(string nombreVariable)//foreach
         {
-        // poner un forech
-            return 0;
+            foreach (Variable v in variables)
+            {
+                if (v.getNombre().Equals(nombreVariable))
+                {
+                    return v.getValor();
+                }
+            }
+            return 0; 
         }
+        //Programa  -> Librerias? Variables? Main
         public void Programa()
         {
             Libreria();
@@ -82,12 +92,12 @@ namespace Evalua
                     match(".");
                     match("h");
                 }
-                match(">");
+                match(">");//if (getContenido() == "#")
                 Libreria();
             }
         }
 
-         //Variables -> tipo_dato Lista_identificadores; Variables?
+        //Variables -> tipo_dato Lista_identificadores; Variables?
         private void Variables()
         {
             if (getClasificacion() == Tipos.TipoDato)
@@ -109,21 +119,20 @@ namespace Evalua
             }
         }
 
-         //Lista_identificadores -> identificador (,Lista_identificadores)?
+        //Lista_identificadores -> identificador (,Lista_identificadores)?
         private void Lista_identificadores(Variable.TipoDato tipo)
         {
             if (getClasificacion() == Tipos.Identificador)
             {
-                if(!existeVariable(getContenido()))
+                if (!existeVariable(getContenido()))
                 {
                     addVariable(getContenido(), tipo);
                 }
                 else
                 {
-                    throw new Error("Error de sintaxis, variable duplicada <" + getContenido() +"> en linea: "+ linea , log);
+                    throw new Error("Error de sintaxis, variable duplicada <" + getContenido() + "> en linea: " + linea, log);
                 }
             }
-            
             match(Tipos.Identificador);
             if (getContenido() == ",")
             {
@@ -131,15 +140,15 @@ namespace Evalua
                 Lista_identificadores(tipo);
             }
         }
-        //Bloque de instrucciones -> {listaIntrucciones?}
+        //Bloque de instrucciones -> {lista de intrucciones?}
         private void BloqueInstrucciones()
         {
             match("{");
             if (getContenido() != "}")
             {
                 ListaInstrucciones();
-            }    
-            match("}"); 
+            }
+            match("}");
         }
 
         //ListaInstrucciones -> Instruccion ListaInstrucciones?
@@ -156,7 +165,7 @@ namespace Evalua
         private void ListaInstruccionesCase()
         {
             Instruccion();
-            if (getContenido() != "case" && getContenido() !=  "break" && getContenido() != "default" && getContenido() != "}")
+            if (getContenido() != "case" && getContenido() != "break" && getContenido() != "default" && getContenido() != "}")
             {
                 ListaInstruccionesCase();
             }
@@ -181,15 +190,15 @@ namespace Evalua
             {
                 While();
             }
-            else if(getContenido() == "do")
+            else if (getContenido() == "do")
             {
                 Do();
             }
-            else if(getContenido() == "for")
+            else if (getContenido() == "for")
             {
                 For();
             }
-            else if(getContenido() == "switch")
+            else if (getContenido() == "switch")
             {
                 Switch();
             }
@@ -202,17 +211,22 @@ namespace Evalua
         //Asignacion -> identificador = cadena | Expresion;
         private void Asignacion()
         {
+            //Requerimiento 2---->si no existe la variable levantamos la excepcion
+            if(!existeVariable(getContenido()))
+            {
+                throw new Error("La variable "+getContenido()+" no existe.", log);
+            } 
             log.WriteLine();
             log.Write(getContenido() + " = ");
             string nombre = getContenido();
-            //Requerimiento 2.- Si no existe la varibale(getcontenido) levanta la excepcion y termina el programa
             match(Tipos.Identificador);
             match(Tipos.Asignacion);
             Expresion();
             match(";");
             float resultado = stack.Pop();
-            log.Write("=" + resultado);
+            log.Write(" = " + resultado);
             log.WriteLine();
+            //Requerimiento 3----
             modVariable(nombre, resultado);
         }
 
@@ -223,7 +237,7 @@ namespace Evalua
             match("(");
             Condicion();
             match(")");
-             if (getContenido() == "{") 
+            if (getContenido() == "{")
             {
                 BloqueInstrucciones();
             }
@@ -244,7 +258,7 @@ namespace Evalua
             else
             {
                 Instruccion();
-            } 
+            }
             match("while");
             match("(");
             Condicion();
@@ -263,7 +277,7 @@ namespace Evalua
             match(")");
             if (getContenido() == "{")
             {
-                BloqueInstrucciones();  
+                BloqueInstrucciones();
             }
             else
             {
@@ -272,21 +286,26 @@ namespace Evalua
         }
 
         //Incremento -> Identificador ++ | --
-        private void Incremento() //Obtener el valor de varible e incrementar 1
+        //Funcion para requerimiento 4
+        private void Incremento()
         {
             string variable = getContenido();
-            //Requerimiento 2.- Si no existe la varibale(getcontenido) levanta la excepcion y termina el programa
+            //Requerimiento 2---->si no existe la variable levantamos la excepcion
+            if(!existeVariable(getContenido()))
+            {
+                throw new Error("La variable "+getContenido()+" no existe.", log);
+            } 
             match(Tipos.Identificador);
-            if(getContenido() == "+")
+            if (getContenido() == "++") //Faltaba un signo de mas
             {
                 match("++");
-                //Requerimiento 4--------------------------
-                modVariable(variable, getValor(variable)+1);
+                modVariable(variable, getValor(variable) + 1);
             }
             else
             {
                 match("--");
-                modVariable(variable, getValor(variable)-1);
+                modVariable(variable, getValor(variable) - 1);
+
             }
         }
 
@@ -300,13 +319,13 @@ namespace Evalua
             match(")");
             match("{");
             ListaDeCasos();
-            if(getContenido() == "default")
+            if (getContenido() == "default")
             {
                 match("default");
                 match(":");
                 if (getContenido() == "{")
                 {
-                    BloqueInstrucciones();  
+                    BloqueInstrucciones();
                 }
                 else
                 {
@@ -324,24 +343,25 @@ namespace Evalua
             stack.Pop();
             match(":");
             ListaInstruccionesCase();
-            if(getContenido() == "break")
+            if (getContenido() == "break")
             {
                 match("break");
                 match(";");
             }
-            if(getContenido() == "case")
+            if (getContenido() == "case")
             {
                 ListaDeCasos();
             }
         }
 
-        //Condicion -> Expresion operador relacional Expresion
+        //Switch -> switch (Expresion) {Lista de casos} | (default: ) //Condicion -> Expresion operador relacional Expresion
         private void Condicion()
         {
             Expresion();
             stack.Pop();
             match(Tipos.OperadorRelacional);
             Expresion();
+            stack.Pop();
         }
 
         //If -> if(Condicion) bloque de instrucciones (else bloque de instrucciones)?
@@ -353,7 +373,7 @@ namespace Evalua
             match(")");
             if (getContenido() == "{")
             {
-                BloqueInstrucciones();  
+                BloqueInstrucciones();
             }
             else
             {
@@ -373,15 +393,18 @@ namespace Evalua
             }
         }
 
-        //Printf -> printf(cadena | expresion);
-        //Quitar las comillas
+        //Printf -> printf(cadena);
         private void Printf()
         {
             match("printf");
             match("(");
-            if(getClasificacion() == Tipos.Cadena)
+            if (getClasificacion() == Tipos.Cadena)
             {
-                Console.Write(getContenido());
+                //Requerimiento 1 
+                setContenido(getContenido().Replace("\"","")); // El caracter "\" se usa para que nos deje tomar las comillas como caracter a remplazar.
+                setContenido(getContenido().Replace("\\n","\n")); // El caracter "\\n" se usa para que nos deje tomar el salto de linea para remplazarlo.
+                setContenido(getContenido().Replace("\\t","\t")); // El caracter "\\t" se usa para que nos deje tomar la tabulacion para remplazarlo.
+                Console.Write(getContenido()); 
                 match(Tipos.Cadena);
             }
             else
@@ -389,24 +412,26 @@ namespace Evalua
                 Expresion();
                 Console.Write(stack.Pop());
             }
-            Console.Write(getContenido());
-            
             match(")");
             match(";");
         }
 
-        //Scanf -> scanf(cadena ,&, indentificador);
-        //Requerimiento 5.- Modificar el valor de la variable
-        private void Scanf()    
+        //Scanf -> scanf(cadena, &Identificador);
+        private void Scanf()
         {
             match("scanf");
             match("(");
             match(Tipos.Cadena);
             match(",");
             match("&");
-            //Requerimiento 2-Si no existe la variable levanta la excepcion
-            string val = ""+ Console.ReadLine();
-            
+            //Requerimiento 2 - Si no existe la variable levanta la excepcion
+            if(!existeVariable(getContenido()))
+            {
+                throw new Error("La variable "+getContenido()+" no existe.", log);
+            } 
+            string valor = ""+Console.ReadLine();//Leemos el valor escrito en la consola y se lo asignamos a la variable valor.
+            //Requerimiento 5: Modificar el valor de la variable
+            modVariable(getContenido(), float.Parse(valor)); //Usamos el parse para cambiar el tipo de dato de la variable valor.
             match(Tipos.Identificador);
             match(")");
             match(";");
@@ -436,18 +461,19 @@ namespace Evalua
                 string operador = getContenido();
                 match(Tipos.OperadorTermino);
                 Termino();
-                log.WriteLine(operador + " ");
-                float n1=stack.Pop();
-                float n2=stack.Pop();
+                log.Write(operador + " ");
+                float n1 = stack.Pop();
+                float n2 = stack.Pop();
+
                 switch (operador)
                 {
                     case "+":
-                        stack.Push(n2+n1);
+                        stack.Push(n2 + n1);
                         break;
                     case "-":
-                        stack.Push(n2-n1);
+                        stack.Push(n2 - n1);
                         break;
-                    
+
                 }
             }
         }
@@ -465,18 +491,17 @@ namespace Evalua
                 string operador = getContenido();
                 match(Tipos.OperadorFactor);
                 Factor();
-                log.WriteLine(operador + " " );
-                float n1=stack.Pop();
-                float n2=stack.Pop();
+                log.Write(operador + " ");
+                float n1 = stack.Pop();
+                float n2 = stack.Pop();
                 switch (operador)
                 {
                     case "*":
-                        stack.Push(n2*n1);
+                        stack.Push(n2 * n1);
                         break;
                     case "/":
-                        stack.Push(n2/n1);
+                        stack.Push(n2 / n1);
                         break;
-                    
                 }
             }
         }
@@ -485,15 +510,19 @@ namespace Evalua
         {
             if (getClasificacion() == Tipos.Numero)
             {
-                log.Write(getContenido() +   " ");
+                log.Write(getContenido() + " ");
                 stack.Push(float.Parse(getContenido()));
                 match(Tipos.Numero);
             }
             else if (getClasificacion() == Tipos.Identificador)
             {
-                //Requerimiento 2.- Si no existe la varibale(getcontenido) levanta la excepcion y termina el programa
-                log.Write(getContenido() +   " ");
-                stack.Push(getValor(getContenido()));
+                //Requerimiento 2---->si no existe la variable levantamos la excepcion
+                if(!existeVariable(getContenido()))
+                {
+                    throw new Error("La variable "+getContenido()+" no existe.", log);
+                } 
+                log.Write(getContenido() + " ");
+                stack.Push(getValor((getContenido())));
                 match(Tipos.Identificador);
             }
             else

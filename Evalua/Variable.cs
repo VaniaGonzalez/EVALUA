@@ -1,43 +1,45 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
 namespace Evalua
 {
-
-public class Variable
-{
-    public enum TipoDato
-    { 
-        Char,Int ,Float
-    }
-
-    string nombre;
-    float valor;
-    TipoDato tipo;
-
-    public Variable(string nombre, TipoDato tipo)
+    public class Variable
     {
-        this.nombre = nombre;
-        this.tipo = tipo;
-        valor=0;
-    }
+        public enum TipoDato
+        {
+            Char, Int, Float
+        }
+        string nombre;
+        float valor;
+        TipoDato tipo; 
 
-    protected void setValor(float valor)
-    {
-        this.valor = valor;
-    }
-    
-    public float getValor()
-    {
-        return this.valor;
-    }
-    public string getNombre()
-    {
-        return this.nombre;
-    }
+        public Variable(string nombre, TipoDato tipo)
+        {
+            this.nombre = nombre;
+            this.tipo = tipo;
+            valor = 0;
+        }
 
-    public TipoDato getTipo()
-    {
-        return this.tipo;
+        public void setValor(float valor)
+        {
+            this.valor = valor;
+        }
+
+        public float getValor()
+        {
+            return this.valor;
+        }
+
+        public string getNombre()   	
+        {
+             return this.nombre; 
+        }
+
+        public TipoDato getTipo()
+        {
+            return this.tipo;
+        }
     }
 }
-
-}
-

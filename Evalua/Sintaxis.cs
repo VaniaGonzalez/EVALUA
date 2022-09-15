@@ -35,7 +35,7 @@ namespace Evalua
             else
             {
                 //Requerimiento 9 agregar el numero de linea en el error
-                
+                throw new Error("Error de sintaxis, se espera un " +espera+" en linea: "+linea , log);
             }
         }
     }
